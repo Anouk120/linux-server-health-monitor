@@ -85,3 +85,11 @@ REPORT="reports/monitor-$(date +%Y%m%d-%H%M%S).txt"
     echo "Report saved to: $REPORT"
     echo "===================================="
 } | tee "$REPORT"
+
+if [ "$DISK_USAGE" -ge 80 ] || \
+   [ "$MEMORY_AVAILABLE" -lt 20 ] || \
+   [ "$INTERNET_STATUS" = "FAILED" ]; then
+    exit 1
+else
+    exit 0
+fi
